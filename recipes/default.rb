@@ -6,3 +6,5 @@
 # Copyright Holder Email:: kylebe@gmail.com
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+
+include_recipe 'kbe_role_ubuntu_1604_base'

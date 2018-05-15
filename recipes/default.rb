@@ -8,6 +8,7 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
 include_recipe 'kbe_role_ubuntu_1604_base'
+include_recipe 'kbe_nginx'
 
 template '/var/www/ddgsearch.pl' do
   source 'ddgsearch.pl.erb'

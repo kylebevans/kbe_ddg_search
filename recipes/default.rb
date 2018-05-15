@@ -8,3 +8,15 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
 include_recipe 'kbe_role_ubuntu_1604_base'
+
+template '/var/www/ddgsearch.pl' do
+  source 'ddgsearch.pl.erb'
+  owner 'root'
+  group 'www-data'
+  mode '0750'
+end
+
+execute 'ddg_search_app' do
+  command 'uwsgi --socket 127.0.0.1:3031 --psgi /var/www/ddgsearch.pl'
+  not_if 'ps auxww | grep ddgsearch.pl'
+end

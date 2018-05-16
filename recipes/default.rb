@@ -20,7 +20,7 @@ template '/var/www/ddgsearch.pl' do
 end
 
 execute 'ddg_search_app' do
-  command 'uwsgi --plugins psgi --socket 127.0.0.1:3031 --psgi /var/www/ddgsearch.pl --master --daemonize --logger syslog:uwsgi --pidfile /run/uwsgi.pid'
+  command 'uwsgi --plugins psgi --socket 127.0.0.1:3031 --psgi /var/www/ddgsearch.pl --master --logger syslog:uwsgi --pidfile /run/uwsgi.pid &'
   not_if "ps auxww | grep -v grep | grep 'uwsgi --plugins psgi --socket 127.0.0.1:3031 --psgi /var/www/ddgsearch.pl --master'"
   notifies :reload, 'service[nginx]'
 end

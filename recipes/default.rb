@@ -16,7 +16,7 @@ template '/var/www/ddgsearch.pl' do
   owner 'root'
   group 'www-data'
   mode '0750'
-  notifies :reload, 'execute[restart_uwsgi]'
+  notifies :run, 'execute[restart_uwsgi]'
 end
 
 execute 'ddg_search_app' do

@@ -5,22 +5,32 @@ use LWP::UserAgent;
 use HTTP::Request::Common qw(GET);
 use Crypt::SSLeay;
 
-my $ua = LWP::UserAgent->new;
+my $ddgsearch = sub {
+  my $env = shift;
+  my $ua = LWP::UserAgent->new;
 
-# Define user agent type
-$ua->agent('Mozilla/8.0');
+  # Define user agent type
+  $ua->agent('Mozilla/8.0');
 
-# Request object
-my $req = GET 'https://duckduckgo.com';
+  # Request object
+  my $req = GET 'https://duckduckgo.com';
 
-# Make the request
-my $res = $ua->request($req);
+  # Make the request
+  my $res = $ua->request($req);
 
-# Check the response
-if ($res->is_success) {
-  print $res->content;
-} else {
-  print $res->status_line . "\n";
-}
-
-exit 0;
+  # Display response
+  if ($res->is_success) {
+    return [
+      '200',
+      [ 'Content-Type' => 'text/html' ],
+      [ $res->content ],
+    ];
+  } 
+  else {
+    return [
+      $res->code,
+      [ 'Content-Type' => 'text/html' ],
+      [ $res->status_line ],
+    ];
+  }
+};

@@ -7,3 +7,5 @@ long_description 'Installs/Configures kbe_ddg_search'
 version '0.1.0'
 
 depends 'kbe_role_ubuntu_1604_base'
+depends 'kbe_perl'
+depends 'kbe_nginx'

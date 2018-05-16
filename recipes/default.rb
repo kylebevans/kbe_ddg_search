@@ -20,5 +20,5 @@ end
 
 execute 'ddg_search_app' do
   command 'uwsgi --socket 127.0.0.1:3031 --psgi /var/www/ddgsearch.pl'
-  not_if 'ps auxww | grep ddgsearch.pl'
+  not_if "ps auxww | grep 'uwsgi --socket 127.0.0.1:3031 --psgi /var/www/ddgsearch.pl'"
 end
